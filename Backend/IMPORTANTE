@@ -1,0 +1,21 @@
+---DEPENDÊNCIAS GERAIS---
+
+*Node js
+
+-Gerenciadores de pacotes
+*Yarn ou Npm
+
+-Editor de código
+*Visual Studio
+
+---DEPENDÊNCIAS VECESSÁRIAS PARA RODAR O BACKEND---
+--INSTALAR DENTRO DO PROJETO--
+Usar comando para instalação de acordo com o gerenciador que foi instalado
+-YARN - NPM
+
+*Express
+*Nodemon
+*Axios
+*Sequelize
+*Mysql2
+

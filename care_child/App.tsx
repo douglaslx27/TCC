@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Routes from './src/routes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Cadastro } from './src/pages/Cadastro';
+
 import {
   useFonts,
   RobotoSlab_400Regular,
@@ -22,7 +21,7 @@ export default function App() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>
-          Aguarde as fontes carregarem!!
+          Aguarde as fontes carregarem!!!
         </Text>
       </View>
     )

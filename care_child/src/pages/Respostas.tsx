@@ -17,30 +17,14 @@ import { useRoute } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/core";
+import { PerguntasProps, RespostasProps, UsuariosProps } from '../libs/props';
 
 interface Params {
-    pergunta: {
-        id: number;
-        email_usuario: string;
-        conteudo: string;
-        datapost: string;
-    }
-}
-
-interface RespostasProps {
-    id: number;
-    email_usuario: string;
-    id_pergunta: number;
-    conteudo: string;
-    datapost: string;
+    pergunta: PerguntasProps
 }
 
 interface ParamsUser {
-    usuario: {
-        nome: string;
-        sexo: string;
-        email: string;
-    }
+    usuario: UsuariosProps
 }
 
 export function Respostas() {
@@ -55,13 +39,15 @@ export function Respostas() {
     const [conteudo, setConteudo] = useState<string>();
     const [visible, setVisible] = useState(false);
 
+    let count = 0;
     useEffect(() => {
         async function listRespostas(id_pergunta: number) {
-            const { data } = await api.get('/respostas', { params: { id_pergunta } });
+            let { data } = await api.get('/respostas', { params: { id_pergunta } });
             setResposta(data);
+            count = resposta.length;
         }
         listRespostas(pergunta.id);
-    }, []);
+    }, [count]);
 
     async function loadEmail() {
         const emails = await AsyncStorage.getItem('email');
@@ -88,7 +74,10 @@ export function Respostas() {
                 id_pergunta: pergunta.id,
                 conteudo: conteudo
             });
+
         }
+        await count++;
+
         setVisible(false)
     }
 

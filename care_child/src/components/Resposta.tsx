@@ -2,26 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
-    StyleSheet,
-    TouchableOpacity
+    StyleSheet
 } from 'react-native';
+import { RespostasProps, UsuariosProps } from "../libs/props";
 
 import api from "../services/api";;
 import fonts from "../styles/fonts";
-
-interface RespostasProps {
-    id: number;
-    email_usuario: string;
-    id_pergunta: number;
-    conteudo: string;
-    datapost: string;
-}
-
-interface UsuariosProps {
-    nome: string;
-    sexo: string;
-    email: string;
-}
 
 export function Resposta(dadosResposta: RespostasProps) {
 

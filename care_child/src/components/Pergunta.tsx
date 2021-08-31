@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/core';
 import UserImg from '../assets/Douglas.png';
 import fonts from '../styles/fonts';
 import api from "../services/api";
+import { PerguntasProps, UsuariosProps } from "../libs/props";
 
 function reduzTexto(texto: string) {
     let textoSaida = texto.substr(0, 15);
@@ -26,19 +27,6 @@ function formataData(data: string) {
 
     return anoHora;
 }
-
-interface PerguntasProps {
-    id: number;
-    email_usuario: string;
-    conteudo: string;
-    datapost: string;
-}
-interface UsuariosProps {
-    nome: string;
-    sexo: string;
-    email: string;
-}
-
 
 export function Pergunta(dados: PerguntasProps) {
 

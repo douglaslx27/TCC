@@ -1,5 +1,7 @@
 const pergunta = require('../models/perguntas');
 const data = require('../utils/obterData');
+const api = require('../utils/api');
+const { sendMessage } = require('../websocket');
 
 module.exports = {
 
@@ -7,13 +9,18 @@ module.exports = {
         let lista = await pergunta.listarPerguntas();
         response.json(lista);
 
-        return (lista)
+        //return (lista)
     },
 
     async store(request, response) {
         let { email_usuario, conteudo } = await request.body;
         let datapost = await data.obterData();
         await pergunta.salvar(email_usuario, conteudo, datapost);
-        response.json({ email_usuario, conteudo, datapost });
+        let emailRecomendado = await api.get('/recomendacao');
+        console.log('RECOMENDAÇÃO', emailRecomendado.data);
+        emailRecomendado = emailRecomendado.data;
+        response.json(emailRecomendado);
+        sendMessage('Recomendação', emailRecomendado);
+
     }
 }

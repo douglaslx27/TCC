@@ -13,20 +13,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/core";
 import { LinearGradient } from "expo-linear-gradient";
 import { Title } from '../components/Title';
-import { Cadastro } from './Cadastro';
+
 import { Pergunta } from '../components/Pergunta';
 import { Feather } from '@expo/vector-icons';
 import fonts from '../styles/fonts';
-import api from '../services/api';
 
-interface PerguntasProps {
-    id: number;
-    email_usuario: string;
-    conteudo: string;
-    datapost: string;
-}
+import api from '../services/api';
+import { connect, disconnect, socketRecomendacao } from '../services/socket';
+import { PerguntasProps } from '../libs/props';
 
 export function Perguntas() {
+
     const navigation = useNavigation();
     const [perguntas, setPerguntas] = useState<PerguntasProps[]>([]);
     const [visible, setVisible] = useState(false);
@@ -34,13 +31,16 @@ export function Perguntas() {
 
     useEffect(() => {
         async function listPerguntas() {
-            const { data } = await api.get('/perguntas?sort=nome&order=asc');
+            connect();
+            const { data } = await api.get('/perguntas');
             setPerguntas(data);
 
         }
         listPerguntas();
+        console.log('Chamando socketRecomendacao');
+        socketRecomendacao();
 
-    }, [])
+    }, []);
 
     function handleChangeConteudo(conteudoS: string) {
         setConteudo(conteudoS);
@@ -55,6 +55,7 @@ export function Perguntas() {
 
         }
     }
+
     async function fazerPergunta() {
         const email = await AsyncStorage.getItem('email');
         console.log(conteudo)
@@ -64,11 +65,11 @@ export function Perguntas() {
                 email_usuario: email,
                 conteudo: conteudo
             });
+
             navigation.navigate('Perguntas');
         }
-        setVisible(false)
-
-
+        setVisible(false);
+        //disconnect();
     }
 
     return (

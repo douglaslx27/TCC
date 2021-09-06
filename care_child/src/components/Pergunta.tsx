@@ -78,9 +78,7 @@ export function Pergunta(dados: PerguntasProps) {
                     {anoHora[1]}
                 </Text>
 
-
             </TouchableOpacity>
-
 
         </View>
     )
@@ -121,7 +119,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         fontFamily: fonts.question
-
     },
     dataHora: {
         fontSize: 10,

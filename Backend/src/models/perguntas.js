@@ -34,7 +34,9 @@ async function salvar(email_usuario, conteudo, datapost) {
 };
 
 async function listarPerguntas() {
-    let lista = await Pergunta.findAll()
+    let lista = await Pergunta.findAll({
+        order: [['id', 'DESC']]
+    })
 
     lista = JSON.stringify(lista);
     lista = JSON.parse(lista);

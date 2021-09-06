@@ -72,46 +72,47 @@ export function Cadastro() {
                 style={styles.container}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <Text style={styles.text} >
-                    Informe seu nome
-                </Text>
-
-                <TextInput
-                    style={styles.input}
-                    placeholder={"Digite seu nome aqui"}
-                    onChangeText={handleChangeNome}
-                />
-
-                <Text style={styles.text} >
-                    Informe seu email
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={"Digite email aqui"}
-                    onChangeText={handleChangeEmail}
-                />
-                <Text style={styles.text} >
-                    Informe seu sexo
-                </Text>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.text}>
-                        Masculino
+                <View style={styles.subContainer}>
+                    <Text style={styles.text} >
+                        Informe seu nome
                     </Text>
-                    <RadioButton
-                        value="M"
-                        status={sexo === 'M' ? 'checked' : 'unchecked'}
-                        onPress={() => setSexo('M')}
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"Digite seu nome aqui"}
+                        onChangeText={handleChangeNome}
                     />
-                    <Text style={styles.text}>
-                        {`\t`} Feminino
+
+                    <Text style={styles.text} >
+                        Informe seu email
                     </Text>
-                    <RadioButton
-                        value="F"
-                        status={sexo === 'F' ? 'checked' : 'unchecked'}
-                        onPress={() => setSexo('F')}
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"Digite email aqui"}
+                        onChangeText={handleChangeEmail}
                     />
+                    <Text style={styles.text} >
+                        Informe seu sexo
+                    </Text>
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <Text style={styles.text}>
+                            Masculino
+                        </Text>
+                        <RadioButton
+                            value="M"
+                            status={sexo === 'M' ? 'checked' : 'unchecked'}
+                            onPress={() => setSexo('M')}
+                        />
+                        <Text style={styles.text}>
+                            {`\t`} Feminino
+                        </Text>
+                        <RadioButton
+                            value="F"
+                            status={sexo === 'F' ? 'checked' : 'unchecked'}
+                            onPress={() => setSexo('F')}
+                        />
+                    </View>
                 </View>
-
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.6}
@@ -123,8 +124,6 @@ export function Cadastro() {
 
                 </TouchableOpacity>
             </KeyboardAvoidingView>
-
-
         </LinearGradient>
     )
 }
@@ -135,6 +134,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    subContainer: {
+        alignContent: 'center',
+        alignItems: 'center'
     },
     text: {
         fontSize: 14,
@@ -166,6 +169,5 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: fonts.userName,
         color: 'white'
-
     }
 })

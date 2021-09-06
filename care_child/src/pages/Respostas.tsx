@@ -18,6 +18,8 @@ import { Feather } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/core";
 import { PerguntasProps, RespostasProps, UsuariosProps } from '../libs/props';
+import { socketNotificaResposta } from '../services/socket';
+import { notifica } from '../services/notificacao';
 
 interface Params {
     pergunta: PerguntasProps
@@ -38,16 +40,22 @@ export function Respostas() {
     const [resposta, setResposta] = useState<RespostasProps[]>([]);
     const [conteudo, setConteudo] = useState<string>();
     const [visible, setVisible] = useState(false);
+    const [reload, setReload] = useState(false);
 
-    let count = 0;
     useEffect(() => {
         async function listRespostas(id_pergunta: number) {
             let { data } = await api.get('/respostas', { params: { id_pergunta } });
             setResposta(data);
-            count = resposta.length;
+            setReload(false);
         }
         listRespostas(pergunta.id);
-    }, [count]);
+        socketNotificaResposta(notificacao);
+    }, [reload]);
+
+    function notificacao(emailNotificacao: string) {
+        notifica(emailNotificacao, 'Notificar_Usuario');
+        setReload(true)
+    }
 
     async function loadEmail() {
         const emails = await AsyncStorage.getItem('email');
@@ -55,7 +63,6 @@ export function Respostas() {
             navigation.navigate('Cadastro');
         } else {
             setVisible(true);
-
         }
     }
 
@@ -74,10 +81,7 @@ export function Respostas() {
                 id_pergunta: pergunta.id,
                 conteudo: conteudo
             });
-
         }
-        await count++;
-
         setVisible(false)
     }
 
@@ -160,7 +164,6 @@ export function Respostas() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     pergunta: {
         padding: 10,
@@ -178,32 +181,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         alignItems: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
         position: 'absolute',
-        alignSelf: 'flex-start',
         bottom: 10
     },
     sendButton: {
         width: 50,
         height: 50,
         backgroundColor: 'rgba(72, 190, 170, 0.9)',
-        marginRight: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 20,
         borderRadius: 25
-
     },
     input: {
         borderWidth: 1,
-        width: 280,
+        width: 250,
         height: 50,
         borderRadius: 20,
         padding: 5,
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundColor: 'white',
-        marginRight: 10,
-        marginLeft: 10
-
+        backgroundColor: 'white'
     },
     buttonIcon: {
         fontSize: 30,

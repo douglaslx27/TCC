@@ -1,5 +1,6 @@
 const respostas = require('../models/respostas');
 const data = require('../utils/obterData');
+const { notificaResposta } = require('../websocket')
 
 module.exports = {
     async index(request, response) {
@@ -14,6 +15,7 @@ module.exports = {
         let { email_usuario, id_pergunta, conteudo } = await request.body;
         let datapost = data.obterData();
         await respostas.salvar(email_usuario, id_pergunta, conteudo, datapost);
+        notificaResposta('Notificar_Usuario', email_usuario);
         return (response.json({ email_usuario, id_pergunta, conteudo, datapost }));
     }
 }

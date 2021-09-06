@@ -1,8 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import socketio from 'socket.io-client';
-
 async function notifica(emailUsuario: string, motivo: string) {
     const emails = await AsyncStorage.getItem('email');
     let titulo;
@@ -36,43 +34,6 @@ async function notifica(emailUsuario: string, motivo: string) {
     }
 }
 
-const socket = socketio('http://192.168.0.109:3333', {
-    autoConnect: false,
-});
-
-function connect() {
-    if (!socket.connected) {
-        socket.connect();
-        socket.on('message', text => {
-            console.log(text);
-        });
-    }
-
-}
-
-function disconnect() {
-    if (socket.connected) {
-        socket.disconnect();
-    }
-}
-
-function socketRecomendacao(teste: Function) {
-
-    socket.on('Recomendação', data => {
-        teste(data.email);
-    });
-
-}
-
-function socketNotificaResposta(teste: Function) {
-    socket.on('Notificar_Usuario', data => {
-        teste(data)
-    })
-}
-
 export {
-    connect,
-    disconnect,
-    socketRecomendacao,
-    socketNotificaResposta
-};
+    notifica
+}

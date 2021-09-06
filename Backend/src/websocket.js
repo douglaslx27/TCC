@@ -15,8 +15,9 @@ exports.setupWebsocket = (server) => {
 
 exports.sendMessage = (message, emailRecomendado) => {
     console.log('Chamando sendMessage');
-    //if (io.connected) {
     io.emit(message, emailRecomendado)
-    //}
-
 };
+
+exports.notificaResposta = (message, emailUsuario) => {
+    io.emit(message, emailUsuario)
+}

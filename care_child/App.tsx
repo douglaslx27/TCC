@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
 import Routes from './src/routes';
+import imagem from './assets/splash.png';
 
 import {
   useFonts,
@@ -20,20 +21,18 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>
-          Aguarde as fontes carregarem!!!
-        </Text>
+        <Image
+          source={imagem}
+          style={styles.imagem}
+        />
+
       </View>
     )
   }
 
   return (
-
-
     <View style={styles.container}>
-
       <Routes />
-
     </View>
 
   );
@@ -42,5 +41,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  imagem: {
+    width: 380,
+    height: 600
   }
 });

@@ -3,23 +3,20 @@ const usuario = require('../models/usuarios');
 module.exports = {
     async store(request, response) {
         console.log(request.body)
-        const { nome, sexo, email } = request.body;
+        const { nome, sexo, email, imagem } = request.body;
         let confereEmail = await usuario.consultaEmail(email);
-        console.log(confereEmail);
+
         if (!confereEmail) {
-            await usuario.salvar(nome, sexo, email);
-            return response.json({ nome, sexo, email })
+            await usuario.salvar(nome, sexo, email, imagem.base64);
+            return response.json({ nome, sexo, email, imagem })
         } else {
-            console.log('EMAIL JÁ CADASTRADO')
             return response.json({ message: "EMAIL JÁ CADASTRADO" })
         }
     },
 
     async buscarUsuario(request, response) {
         let { email } = await request.query;
-        console.log(email);
         let dados = await usuario.buscarUsuario(email);
-        console.log(dados);
         return response.json(dados[0])
     },
 

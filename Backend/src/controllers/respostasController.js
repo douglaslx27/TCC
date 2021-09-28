@@ -5,7 +5,6 @@ const { notificaResposta } = require('../websocket')
 module.exports = {
     async index(request, response) {
         let { id_pergunta } = await request.query;
-        console.log(id_pergunta);
         let lista = await respostas.listarRespostas(id_pergunta);
 
         return (response.json(lista));

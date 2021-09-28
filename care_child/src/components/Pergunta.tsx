@@ -8,20 +8,20 @@ import {
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
-import UserImg from '../assets/Douglas.png';
 import fonts from '../styles/fonts';
 import api from "../services/api";
 import { PerguntasProps, UsuariosProps } from "../libs/props";
+import avatar from "../assets/avatar.png";
 
 function reduzTexto(texto: string) {
-    let textoSaida = texto.substr(0, 15);
+    let textoSaida = texto.substr(0, 18);
 
     return textoSaida
 }
 
 function formataData(data: string) {
     let ano = data.substr(0, 10);
-    let hora = data.substr(11);
+    let hora = data.substr(11, 5);
 
     let anoHora = [ano, hora];
 
@@ -61,7 +61,7 @@ export function Pergunta(dados: PerguntasProps) {
                 onPress={() => handleRespostas(dados)}
             >
                 <Image
-                    source={UserImg}
+                    source={!usuario?.imagem ? avatar : { uri: `data:image/jpg;base64,${usuario?.imagem}` }}
                     style={styles.image}
                 />
                 <View style={styles.subContainer}>
@@ -75,6 +75,7 @@ export function Pergunta(dados: PerguntasProps) {
                 </View>
 
                 <Text style={styles.dataHora}>
+                    {anoHora[0]}{"\n"}
                     {anoHora[1]}
                 </Text>
 

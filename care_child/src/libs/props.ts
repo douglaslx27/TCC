@@ -9,6 +9,7 @@ export interface UsuariosProps {
     nome: string;
     sexo: string;
     email: string;
+    imagem: string;
 }
 
 export interface RespostasProps {

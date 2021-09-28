@@ -8,7 +8,7 @@ function obterData() {
     let hora = data.getHours();
     let minutos = data.getMinutes();
 
-    let dataTime = ano + '-' + (mes + 1) + '-' + dia + ' ' + hora + ':' + minutos;
+    let dataTime = ano + '-' + (mes + 1) + '-' + dia + ' ' + (hora - 3) + ':' + minutos;
 
     return dataTime;
 }

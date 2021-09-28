@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Text,
     View,
@@ -10,57 +10,28 @@ import {
     Alert
 } from 'react-native';
 import { RadioButton } from "react-native-paper"
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import api from "../services/api";
 import { useNavigation } from "@react-navigation/core";
 import { LinearGradient } from "expo-linear-gradient";
 import fonts from "../styles/fonts";
 
-export function Cadastro() {
+export function Cadastro_NS() {
+
     const navigation = useNavigation();
 
     const [nome, setNome] = useState<string>();
     const [sexo, setSexo] = useState<string>();
-    const [email, setemail] = useState<string>();
 
     function handleChangeNome(nomeS: string) {
         setNome(nomeS);
     }
-    function handleChangeEmail(emailS: string) {
-        setemail(emailS);
-    }
 
-    async function setUsuario(email: string) {
-
-        await api.post('/usuarios', {
-            nome: nome,
-            sexo: sexo,
-            email: email,
-        })
-
-    }
-
-    async function handlePerguntas() {
+    async function handleCadastro_EI() {
         if (!nome)
             return Alert.alert('Informe o Nome Por Favor')
         if (!sexo)
             return Alert.alert('Informe o Sexo Por Favor')
-        if (!email)
-            return Alert.alert('Informe o Email Por Favor')
 
-        const { data } = await api.get('/usuarios', { params: { email } });
-        if (data) {
-            return Alert.alert('Esse Email já está sendo usado');
-        }
-
-        await setUsuario(email);
-
-        await AsyncStorage.setItem('nome', nome)
-        await AsyncStorage.setItem('sexo', sexo)
-        await AsyncStorage.setItem('email', email)
-
-        navigation.navigate('Perguntas');
-
+        navigation.navigate('Cadastro_EI', { nome, sexo });
     }
 
     return (
@@ -84,16 +55,9 @@ export function Cadastro() {
                     />
 
                     <Text style={styles.text} >
-                        Informe seu email
-                    </Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={"Digite email aqui"}
-                        onChangeText={handleChangeEmail}
-                    />
-                    <Text style={styles.text} >
                         Informe seu sexo
                     </Text>
+
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
                         <Text style={styles.text}>
                             Masculino
@@ -116,10 +80,10 @@ export function Cadastro() {
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.6}
-                    onPress={() => handlePerguntas()}
+                    onPress={() => handleCadastro_EI()}
                 >
                     <Text style={styles.textButton}>
-                        Salvar
+                        Próximo
                     </Text>
 
                 </TouchableOpacity>

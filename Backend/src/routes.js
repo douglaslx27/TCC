@@ -6,7 +6,6 @@ const routes = Router();
 
 routes.post('/usuarios', usuarioController.store);
 routes.get('/usuarios', usuarioController.buscarUsuario);
-//routes.get('/usuarios', usuarioController.consultaEmail);
 
 routes.get('/perguntas', perguntasController.index);
 routes.post('/perguntas', perguntasController.store);

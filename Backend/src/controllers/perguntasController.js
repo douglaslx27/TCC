@@ -16,11 +16,10 @@ module.exports = {
         let { email_usuario, conteudo } = await request.body;
         let datapost = await data.obterData();
         await pergunta.salvar(email_usuario, conteudo, datapost);
-        let emailRecomendado = await api.get('/recomendacao');
-        console.log('RECOMENDAÇÃO', emailRecomendado.data);
-        emailRecomendado = emailRecomendado.data;
-        response.json(emailRecomendado);
-        sendMessage('Recomendação', emailRecomendado);
+        //let emailRecomendado = await api.get('/recomendacao');
+        //emailRecomendado = emailRecomendado.data;
+        //response.json(emailRecomendado);
+        //sendMessage('Recomendação', emailRecomendado);
 
     }
 }

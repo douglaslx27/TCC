@@ -19,7 +19,7 @@ import { Feather } from '@expo/vector-icons';
 import fonts from '../styles/fonts';
 
 import api from '../services/api';
-import { connect, disconnect, socketRecomendacao } from '../services/socket';
+import { connect, socketRecomendacao } from '../services/socket';
 import { notifica } from '../services/notificacao';
 import { PerguntasProps } from '../libs/props';
 
@@ -31,8 +31,6 @@ export function Perguntas() {
     const [conteudo, setConteudo] = useState<string>();
     const [reload, setReload] = useState(false)
 
-
-
     useEffect(() => {
         async function listPerguntas() {
             connect();
@@ -41,7 +39,6 @@ export function Perguntas() {
             setReload(false)
         }
         listPerguntas();
-        console.log('Chamando socketRecomendacao');
         socketRecomendacao(notificacao);
 
     }, [reload]);
@@ -58,17 +55,15 @@ export function Perguntas() {
     async function loadEmail() {
         const emails = await AsyncStorage.getItem('email');
         if (!emails) {
-            navigation.navigate('Cadastro');
+            navigation.navigate('Cadastro_NS');
         } else {
             setVisible(true);
-
         }
     }
 
     async function fazerPergunta() {
         const email = await AsyncStorage.getItem('email');
-        console.log(conteudo)
-        console.log(email)
+
         if (conteudo) {
             await api.post('/perguntas', {
                 email_usuario: email,
@@ -78,7 +73,6 @@ export function Perguntas() {
             navigation.navigate('Perguntas');
         }
         setVisible(false);
-        //disconnect();
     }
 
     return (
@@ -86,7 +80,6 @@ export function Perguntas() {
             colors={['rgba(45,222,200,0.97)', 'rgba(15,30,40,0.97)']}
             style={styles.container}
         >
-
             <Title />
 
             <FlatList
@@ -98,12 +91,11 @@ export function Perguntas() {
                         email_usuario={item.email_usuario}
                         conteudo={item.conteudo}
                         datapost={item.datapost}
+
                     />
                 )}
                 showsVerticalScrollIndicator={false}
-
             />
-
 
             {
                 visible &&
@@ -123,7 +115,6 @@ export function Perguntas() {
                             style={styles.buttonIcon}
                         />
                     </TouchableOpacity>
-
 
                 </View>
             }
@@ -172,7 +163,6 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
         width: 250,
-        height: 50,
         borderRadius: 20,
         padding: 5,
         paddingLeft: 20,

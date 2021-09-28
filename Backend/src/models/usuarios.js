@@ -15,6 +15,9 @@ const Usuario = sequelize.define('usuarios',
         },
         email: {
             type: Sequelize.STRING(45)
+        },
+        imagem: {
+            type: Sequelize.TEXT
         }
     },
 
@@ -24,12 +27,13 @@ const Usuario = sequelize.define('usuarios',
     },
 );
 //Usuario.sync();
-async function salvar(nome, sexo, email) {
-    const user = Usuario.build({ nome, sexo, email });
+
+async function salvar(nome, sexo, email, imagem) {
+    const user = Usuario.build({ nome, sexo, email, imagem });
 
     console.log(user instanceof Usuario);
     console.log(user.nome);
-    await user.save({ fields: ['nome', 'sexo', 'email'] });
+    await user.save({ fields: ['nome', 'sexo', 'email', 'imagem'] });
 };
 
 async function consultaEmail(email) {
@@ -52,7 +56,8 @@ async function buscarUsuario(email) {
         attributes: [
             'nome',
             'sexo',
-            'email'
+            'email',
+            'imagem'
         ],
 
         where: {
@@ -65,10 +70,10 @@ async function buscarUsuario(email) {
     return user;
 }
 
-async function update(nome, sexo, email) {
+async function update(nome, sexo, email, imagem) {
     await Usuario.update(
         {
-            nome: nome, sexo: sexo
+            nome: nome, sexo: sexo, imagem: imagem
         },
         {
             where: { email: email }

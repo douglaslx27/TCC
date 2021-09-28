@@ -72,9 +72,7 @@ export function Respostas() {
 
     async function criarResposta() {
         const email = await AsyncStorage.getItem('email');
-        console.log(conteudo)
-        console.log(email)
-        console.log(pergunta.id)
+
         if (conteudo) {
             await api.post('/respostas', {
                 email_usuario: email,
@@ -85,8 +83,6 @@ export function Respostas() {
         setVisible(false)
     }
 
-    console.log(resposta);
-
     return (
         <LinearGradient
             colors={['rgba(45,222,200,0.97)', 'rgba(15,30,40,0.97)']}
@@ -96,6 +92,7 @@ export function Respostas() {
                 nome={usuario.nome}
                 sexo={usuario.sexo}
                 email={usuario.email}
+                imagem={usuario.imagem}
             />
 
             <View style={styles.pergunta}>
@@ -198,7 +195,6 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
         width: 250,
-        height: 50,
         borderRadius: 20,
         padding: 5,
         paddingLeft: 20,

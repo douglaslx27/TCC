@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const api = require('../utils/api')
 
 const sequelize = new Sequelize('care_child', 'root', '123456', {
     host: 'localhost',
@@ -40,9 +39,7 @@ async function listarPerguntas() {
 
     lista = JSON.stringify(lista);
     lista = JSON.parse(lista);
-    //let lista = await api.get('/perguntas');
 
-    //console.log(lista);
     return lista.sort();
 };
 

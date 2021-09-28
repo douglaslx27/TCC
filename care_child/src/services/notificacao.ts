@@ -5,21 +5,18 @@ async function notifica(emailUsuario: string, motivo: string) {
     const emails = await AsyncStorage.getItem('email');
     let titulo;
     let corpo;
-    console.log(emailUsuario);
-    console.log(emails)
 
     if (motivo == 'Recomendação') {
         titulo = 'Nova Pergunta'
-        corpo = 'Foi feita uma pergunta do tema q vc domina, venha conferir.'
-        console.log(titulo);
+        corpo = 'Foi feita uma pergunta do tema que vc domina, venha conferir.'
+
     } else {
         titulo = 'Nova Resposta'
-        corpo = 'Sua pergunta foi rspondida, venha conferir.'
-        console.log(titulo);
+        corpo = 'Sua pergunta foi respondida, venha conferir.'
     }
 
     if (emails == emailUsuario) {
-        console.log('Strings iguais');
+
         Notifications.scheduleNotificationAsync({
             content: {
                 title: titulo,

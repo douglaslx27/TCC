@@ -45,7 +45,6 @@ async function listarRespostas(id_pergunta) {
     lista = JSON.stringify(lista);
     lista = JSON.parse(lista);
 
-    console.log(lista);
     return lista;
 };
 

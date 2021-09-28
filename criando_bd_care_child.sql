@@ -6,6 +6,7 @@ create table usuarios(
 	nome varchar(45) not null,
     sexo char(1) not null,
     email varchar(45),
+    imagem text,
     primary key (email)
 )default charset = utf8;
 
@@ -28,3 +29,5 @@ create table respostas(
 	foreign key (email_usuario) references usuarios(email),
     foreign key (id_pergunta) references perguntas(id)
 )default charset = utf8;
+
+#drop database care_child

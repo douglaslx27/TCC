@@ -9,17 +9,11 @@ import {
 
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { Feather } from '@expo/vector-icons';
-import UserImg from '../assets/Douglas.png';
+import { UsuariosProps } from "../libs/props";
+import avatar from "../assets/avatar.png";
 import fonts from '../styles/fonts';
-import api from '../services/api';
 
-interface UsuariosProps {
-    nome: string;
-    sexo: string;
-    email: string;
-}
-
-export function Header(user: UsuariosProps) {
+export function Header(usuario: UsuariosProps) {
     return (
         <View style={styles.container}>
             <TouchableOpacity>
@@ -31,12 +25,12 @@ export function Header(user: UsuariosProps) {
 
             <TouchableOpacity style={styles.header}>
                 <Image
-                    source={UserImg}
+                    source={!usuario.imagem ? avatar : { uri: `data:image/jpg;base64,${usuario.imagem}` }}
                     style={styles.image}
                 />
 
                 <Text style={styles.text}>
-                    {user.nome}
+                    {usuario.nome}
                 </Text>
             </TouchableOpacity>
 
@@ -47,7 +41,6 @@ export function Header(user: UsuariosProps) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        //justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: 'rgba(72, 190, 170, 1)',
         marginTop: getStatusBarHeight(),
@@ -63,14 +56,12 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 30,
         color: 'white',
-        // paddingLeft: 10
     },
     image: {
         width: 60,
         height: 60,
         marginLeft: 10,
         borderRadius: 30,
-
     },
     text: {
         fontFamily: fonts.userName,
@@ -78,6 +69,5 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         color: 'white',
         marginRight: 20
-
     }
 })

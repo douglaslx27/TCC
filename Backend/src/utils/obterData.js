@@ -1,7 +1,7 @@
 function obterData() {
     let data = new Date();
 
-    let dia = data.getDay();
+    let dia = data.getDate();
     let mes = data.getMonth();
     let ano = data.getFullYear();
 

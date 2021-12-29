@@ -13,11 +13,6 @@ exports.setupWebsocket = (server) => {
     });
 };
 
-exports.sendMessage = (message, emailRecomendado) => {
-
-    io.emit(message, emailRecomendado)
+exports.sendMessage = (message, email) => {
+    io.emit(message, email)
 };
-
-exports.notificaResposta = (message, emailUsuario) => {
-    io.emit(message, emailUsuario)
-}

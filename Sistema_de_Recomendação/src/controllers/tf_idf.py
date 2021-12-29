@@ -17,6 +17,7 @@ class Tf_idf():
             tf[termo] = qtd/float(n)
             
         return tf
+
     #CALCULANDO IDF
     def calcula_idf(tfs,bow):
         n = len(tfs)
@@ -32,7 +33,7 @@ class Tf_idf():
             
         return idf
 
-        #CALCULANDO TF-IDF
+    #CALCULANDO TF-IDF
     def calcula_tf_idf(tfs,idfs):
         tfidf = dict.fromkeys(tfs, 0)
         
@@ -41,7 +42,7 @@ class Tf_idf():
                 
         return tfidf
 
-         #DESENVOLVENDO CALCULO TF-IDF
+    #DESENVOLVENDO CALCULO TF-IDF
     def resultado_tf_idf(self,corpDados,dados):
        
 

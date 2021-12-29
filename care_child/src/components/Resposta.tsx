@@ -6,8 +6,10 @@ import {
 } from 'react-native';
 import { RespostasProps, UsuariosProps } from "../libs/props";
 
-import api from "../services/api";;
+import api from "../services/api";
+import { formataData } from "../services/formatarDatas";
 import fonts from "../styles/fonts";
+
 
 export function Resposta(dadosResposta: RespostasProps) {
 
@@ -23,14 +25,24 @@ export function Resposta(dadosResposta: RespostasProps) {
 
     }, []);
 
+    let dataHora = formataData(dadosResposta.datapost);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.userName}>
-                {usuario?.nome}
-            </Text>
+            <View style={styles.subContainer}>
+                <Text style={styles.userName}>
+                    {usuario?.nome}
+                </Text>
+                <Text style={styles.dataHora}>
+                    {dataHora}
+                </Text>
+
+            </View>
+
             <Text style={styles.text}>
                 {dadosResposta.conteudo}
             </Text>
+
         </View>
 
     )
@@ -42,7 +54,13 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 4,
         marginLeft: 10,
+        marginRight: 10,
         alignSelf: 'flex-start'
+    },
+
+    subContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 
     userName: {
@@ -56,10 +74,19 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         fontFamily: fonts.text,
-        paddingRight: 10,
+        //paddingRight: 10,
         paddingLeft: 10,
         paddingBottom: 10,
         marginRight: 10
+    },
+
+    dataHora: {
+        fontSize: 10,
+        color: 'black',
+        paddingTop: 12,
+        marginLeft: 5,
+        marginRight: 12,
+        fontFamily: fonts.text
     }
 
 })

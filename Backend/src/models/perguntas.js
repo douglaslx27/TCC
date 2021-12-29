@@ -27,8 +27,6 @@ const Pergunta = sequelize.define('perguntas',
 
 async function salvar(email_usuario, conteudo, datapost) {
     perg = Pergunta.build({ email_usuario, conteudo, datapost });
-    //console.log(perg instanceof Pergunta);
-    //console.log(perg.email_usuario);
     await perg.save({ fields: ['email_usuario', 'conteudo', 'datapost'] })
 };
 
@@ -42,5 +40,18 @@ async function listarPerguntas() {
 
     return lista.sort();
 };
+async function buscaEmailUsuario(id) {
+    let cont = await Pergunta.findAll({
+        attributes: ['email_usuario'],
+        where: {
+            id: id
+        }
+    });
 
-module.exports = { salvar, listarPerguntas };
+    cont = JSON.stringify(cont);
+    cont = JSON.parse(cont)
+
+    return cont[0];
+}
+
+module.exports = { salvar, listarPerguntas, buscaEmailUsuario };

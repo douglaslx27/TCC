@@ -6,7 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList,
-    TextInput
+    TextInput,
 } from 'react-native';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,8 +19,7 @@ import { Feather } from '@expo/vector-icons';
 import fonts from '../styles/fonts';
 
 import api from '../services/api';
-import { connect, socketRecomendacao } from '../services/socket';
-import { notifica } from '../services/notificacao';
+import { connect, socketRecomendacao, socketNotificaResposta } from '../services/socket';
 import { PerguntasProps } from '../libs/props';
 
 export function Perguntas() {
@@ -29,27 +28,28 @@ export function Perguntas() {
     const [perguntas, setPerguntas] = useState<PerguntasProps[]>([]);
     const [visible, setVisible] = useState(false);
     const [conteudo, setConteudo] = useState<string>();
-    const [reload, setReload] = useState(false)
+
+    async function listPerguntas() {
+
+        const { data } = await api.get('/perguntas');
+        setPerguntas(data);
+    }
 
     useEffect(() => {
-        async function listPerguntas() {
-            connect();
-            const { data } = await api.get('/perguntas');
-            setPerguntas(data);
-            setReload(false)
-        }
+        connect();
         listPerguntas();
-        socketRecomendacao(notificacao);
+        socketRecomendacao(listPerguntas);
+        socketNotificaResposta();
 
-    }, [reload]);
-
-    function notificacao(emailNotificacao: string) {
-        notifica(emailNotificacao, 'Recomendação')
-        setReload(true);
-    }
+    }, []);
 
     function handleChangeConteudo(conteudoS: string) {
         setConteudo(conteudoS);
+    }
+
+    function handleInputBlur() {
+        if (!conteudo)
+            setVisible(false);
     }
 
     async function loadEmail() {
@@ -91,7 +91,6 @@ export function Perguntas() {
                         email_usuario={item.email_usuario}
                         conteudo={item.conteudo}
                         datapost={item.datapost}
-
                     />
                 )}
                 showsVerticalScrollIndicator={false}
@@ -104,6 +103,7 @@ export function Perguntas() {
                         style={styles.input}
                         placeholder={"Escreva uma pergunta"}
                         multiline={true}
+                        onBlur={handleInputBlur}
                         onChangeText={handleChangeConteudo}
                     />
                     <TouchableOpacity

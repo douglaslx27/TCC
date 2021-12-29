@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, LogBox } from 'react-native';
 import Routes from './src/routes';
 import imagem from './assets/splash.png';
 
@@ -9,6 +9,8 @@ import {
   RobotoSlab_600SemiBold,
   RobotoSlab_500Medium
 } from '@expo-google-fonts/roboto-slab';
+
+LogBox.ignoreLogs(['Failed child context type', 'Can\'t perform a React state']);
 
 export default function App() {
 

@@ -3,9 +3,6 @@ import pandas as pd
 import nltk
 import math
 from sklearn.model_selection import train_test_split
-import mysql.connector
-from src.server.conect_db import conect
-con = conect.con
 
 class Recomendacao():
     #FUNÇÃO DE DIDTANCIA

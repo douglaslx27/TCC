@@ -1,8 +1,5 @@
-import * as Notifications from 'expo-notifications';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { notifica } from '../services/notificacao';
 import socketio from 'socket.io-client';
-
 
 const socket = socketio('http://192.168.0.109:3333', {
     autoConnect: false,
@@ -26,13 +23,15 @@ function disconnect() {
 function socketRecomendacao(funcaoCallBack: Function) {
 
     socket.on('Recomendação', data => {
-        funcaoCallBack(data.email);
+        notifica(data.email, 'Recomendação');
+        funcaoCallBack();
     });
 }
 
-function socketNotificaResposta(funcaoCallBack: Function) {
+function socketNotificaResposta() {
     socket.on('Notificar_Usuario', data => {
-        funcaoCallBack(data)
+        notifica(data.email_usuario, 'Notificar_Usuario');
+        //funcaoCallBack();
     })
 }
 

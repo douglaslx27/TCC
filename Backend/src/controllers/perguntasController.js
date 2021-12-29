@@ -8,18 +8,18 @@ module.exports = {
     async index(request, response) {
         let lista = await pergunta.listarPerguntas();
         response.json(lista);
-
-        //return (lista)
     },
 
     async store(request, response) {
         let { email_usuario, conteudo } = await request.body;
         let datapost = await data.obterData();
+        console.log(email_usuario, conteudo, datapost);
         await pergunta.salvar(email_usuario, conteudo, datapost);
-        //let emailRecomendado = await api.get('/recomendacao');
-        //emailRecomendado = emailRecomendado.data;
-        //response.json(emailRecomendado);
-        //sendMessage('Recomendação', emailRecomendado);
+        let emailRecomendado = await api.get('/recomendacao');
+        emailRecomendado = emailRecomendado.data;
+        response.json(emailRecomendado);
+        console.log('RECOMENDAÇÃO => ', emailRecomendado);
+        sendMessage('Recomendação', emailRecomendado);
 
     }
 }

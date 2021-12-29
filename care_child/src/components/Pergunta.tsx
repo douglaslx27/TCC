@@ -10,22 +10,14 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import fonts from '../styles/fonts';
 import api from "../services/api";
+import { formataData } from "../services/formatarDatas";
 import { PerguntasProps, UsuariosProps } from "../libs/props";
 import avatar from "../assets/avatar.png";
 
 function reduzTexto(texto: string) {
-    let textoSaida = texto.substr(0, 18);
+    let textoSaida = texto.substring(0, 18);
 
     return textoSaida
-}
-
-function formataData(data: string) {
-    let ano = data.substr(0, 10);
-    let hora = data.substr(11, 5);
-
-    let anoHora = [ano, hora];
-
-    return anoHora;
 }
 
 export function Pergunta(dados: PerguntasProps) {
@@ -43,7 +35,8 @@ export function Pergunta(dados: PerguntasProps) {
     }, []);
 
     let perguntaReduzida = reduzTexto(dados.conteudo);
-    let anoHora = formataData(dados.datapost);
+
+    let dataHora = formataData(dados.datapost);
 
     const navigation = useNavigation();
 
@@ -75,8 +68,8 @@ export function Pergunta(dados: PerguntasProps) {
                 </View>
 
                 <Text style={styles.dataHora}>
-                    {anoHora[0]}{"\n"}
-                    {anoHora[1]}
+                    {dataHora.substring(0, 5)}{"\n"}
+                    {dataHora.substring(6, 17)}
                 </Text>
 
             </TouchableOpacity>
@@ -124,7 +117,7 @@ const styles = StyleSheet.create({
     dataHora: {
         fontSize: 10,
         color: 'white',
-        marginLeft: 20,
+        marginLeft: 10,
         marginRight: 20,
         fontFamily: fonts.text
     }

@@ -31,7 +31,7 @@ const Resposta = sequelize.define('respostas',
 async function salvar(email_usuario, id_pergunta, conteudo, datapost) {
     res = Resposta.build({ email_usuario, id_pergunta, conteudo, datapost });
     console.log(res instanceof Resposta);
-    console.log(res.id);
+    console.log('ID PERGUNTA', id_pergunta);
     await res.save({ fields: ['email_usuario', 'id_pergunta', 'conteudo', 'datapost'] })
 };
 
@@ -39,7 +39,8 @@ async function listarRespostas(id_pergunta) {
     let lista = await Resposta.findAll({
         where: {
             id_pergunta: id_pergunta
-        }
+        },
+        order: [['id', 'DESC']]
     })
 
     lista = JSON.stringify(lista);

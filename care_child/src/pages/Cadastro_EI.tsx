@@ -144,7 +144,6 @@ export function Cadastro_EI() {
                         autoCompleteType={"email"}
                         onChangeText={handleChangeEmail}
                     />
-
                 </View>
                 <TouchableOpacity
                     style={styles.button}
@@ -157,6 +156,7 @@ export function Cadastro_EI() {
 
                 </TouchableOpacity>
             </KeyboardAvoidingView>
+
         </LinearGradient>
     )
 }
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     buttonImage: {
-        margin: 20,
+        margin: 15,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 0.2,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         height: 50
     },
     button: {
-        margin: 20,
+        margin: 1,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 0.2,

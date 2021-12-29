@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import mysql.connector
 from src.server.conect_db import conect
 con = conect.con
+
 class Pre_processamento_textos():
     def prepara_corpus():
 
@@ -17,9 +18,7 @@ class Pre_processamento_textos():
         cursor = con.cursor()
         cursor.execute(consulta1)
         corpus = cursor.fetchall()
-        #print(linhas)
         corpus_df = pd.DataFrame(corpus,columns=['Perguntas','Respostas','Usuarios'])
-        #print(linDf)
         corpus_df.info()
 
         #----BUSCANDO ULTIMA PERGUNTA CADASTRADA--------

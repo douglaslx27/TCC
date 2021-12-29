@@ -1,5 +1,4 @@
 from flask import Flask
-from src.server.conect_db import conect
 
 class Server():
     def __init__(self, ):

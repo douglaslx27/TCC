@@ -17,7 +17,7 @@ export function Title() {
         <View style={styles.container}>
 
             <Text style={styles.text}>
-                Shild Care
+                Care Child
             </Text>
 
             <TouchableOpacity activeOpacity={0.6}>

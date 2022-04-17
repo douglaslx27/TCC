@@ -111,51 +111,51 @@ export function Cadastro_EI() {
             style={styles.container}
         >
             <KeyboardAvoidingView
-                style={styles.container}
+                style={styles.subContainer}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <View style={styles.subContainer}>
 
-                    <Image
-                        source={!img ? avatar : imagem}
-                        style={{
-                            width: 100,
-                            height: 100,
-                            borderRadius: 50
-                        }}
-                    />
-                    <TouchableOpacity
-                        style={styles.buttonImage}
-                        activeOpacity={0.6}
-                        onPress={pickImage}
-                    >
-                        <Text style={styles.textButton}>
-                            Escolha uma imagem de perfil
-                        </Text>
-
-                    </TouchableOpacity>
-
-                    <Text style={styles.text} >
-                        Informe seu email
-                    </Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={"Digite email aqui"}
-                        autoCompleteType={"email"}
-                        onChangeText={handleChangeEmail}
-                    />
-                </View>
+                <Image
+                    source={!img ? avatar : imagem}
+                    style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 50
+                    }}
+                />
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonImage}
                     activeOpacity={0.6}
-                    onPress={() => handlePerguntas()}
+                    onPress={pickImage}
                 >
                     <Text style={styles.textButton}>
-                        Salvar
+                        Escolha uma imagem de perfil
                     </Text>
 
                 </TouchableOpacity>
+
+                <Text style={styles.text} >
+                    Informe seu email
+                </Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder={"Digite email aqui"}
+                    autoCompleteType={"email"}
+                    onChangeText={handleChangeEmail}
+                />
+
+
             </KeyboardAvoidingView>
+            <TouchableOpacity
+                style={styles.button}
+                activeOpacity={0.6}
+                onPress={() => handlePerguntas()}
+            >
+                <Text style={styles.textButton}>
+                    Salvar
+                </Text>
+
+            </TouchableOpacity>
 
         </LinearGradient>
     )
@@ -169,8 +169,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     subContainer: {
-        alignContent: 'center',
-        alignItems: 'center'
+        // alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     text: {
         fontSize: 14,
@@ -207,7 +208,8 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         backgroundColor: 'rgba(72, 190, 170, 0.9)',
         width: 80,
-        height: 50
+        height: 50,
+        bottom: -30
     },
     textButton: {
         fontSize: 12,

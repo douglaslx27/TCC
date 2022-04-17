@@ -40,43 +40,43 @@ export function Cadastro_NS() {
             style={styles.container}
         >
             <KeyboardAvoidingView
-                style={styles.container}
+                style={styles.subContainer}
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <View style={styles.subContainer}>
-                    <Text style={styles.text} >
-                        Informe seu nome
-                    </Text>
 
-                    <TextInput
-                        style={styles.input}
-                        placeholder={"Digite seu nome aqui"}
-                        onChangeText={handleChangeNome}
+                <Text style={styles.text} >
+                    Informe seu nome
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder={"Digite seu nome aqui"}
+                    onChangeText={handleChangeNome}
+                />
+
+                <Text style={styles.text} >
+                    Informe seu sexo
+                </Text>
+
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.text}>
+                        Masculino
+                    </Text>
+                    <RadioButton
+                        value="M"
+                        status={sexo === 'M' ? 'checked' : 'unchecked'}
+                        onPress={() => setSexo('M')}
                     />
-
-                    <Text style={styles.text} >
-                        Informe seu sexo
+                    <Text style={styles.text}>
+                        {`\t`} Feminino
                     </Text>
-
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Text style={styles.text}>
-                            Masculino
-                        </Text>
-                        <RadioButton
-                            value="M"
-                            status={sexo === 'M' ? 'checked' : 'unchecked'}
-                            onPress={() => setSexo('M')}
-                        />
-                        <Text style={styles.text}>
-                            {`\t`} Feminino
-                        </Text>
-                        <RadioButton
-                            value="F"
-                            status={sexo === 'F' ? 'checked' : 'unchecked'}
-                            onPress={() => setSexo('F')}
-                        />
-                    </View>
+                    <RadioButton
+                        value="F"
+                        status={sexo === 'F' ? 'checked' : 'unchecked'}
+                        onPress={() => setSexo('F')}
+                    />
                 </View>
+
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.6}
@@ -100,8 +100,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     subContainer: {
-        alignContent: 'center',
-        alignItems: 'center'
+        //alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     text: {
         fontSize: 14,
